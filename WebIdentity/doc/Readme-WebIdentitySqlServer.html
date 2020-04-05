@@ -15,7 +15,7 @@
   gtag('config', 'UA-125026365-2');
 </script>
 
-	<title>實作 Microsoft.AspNet.Identity</title>
+	<title>實作 Microsoft.AspNet.Identity.EntityFramework</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	
@@ -32,7 +32,7 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    實作 Microsoft.AspNet.Identity
+    實作 Microsoft.AspNet.Identity.EntityFramework
 	<button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -56,10 +56,10 @@ Subject: 實作 Microsoft.AspNet.Identity.EntityFramework<br />
 
 
 
-本文示範在 ASP.NET Web Forms 網站中, 替換掉 Microsoft.AspNet.Identity.EntityFramework 的方法.<br />
+本文示範在 Visual Studio 2019 ASP.NET Web Forms 網站中, 替換掉 Microsoft.AspNet.Identity.EntityFramework 的方法.<br />
 <br />
 
-修改的方法, 跟先前修改 Visual Studio 2015 自動產生的方法相同:<br />  
+修改的方法, 跟先前修改 Visual Studio 2015 的方法相同:<br />  
 1. <a href="http://svc.011.idv.tw/CodeHelper/cs/ASPNET/identity/WebAuthSQL/doc/Readme-WebAuthSQL.html">SQLServer </a><br />
 2. <a href="http://svc.011.idv.tw/CodeHelper/cs/ASPNET/identity/WebAuthMySQL/doc/Readme-WebAuthMySQL.html">MySQL </a><br />
 但是這次的目標是要修改 Visual Studio 2019 自動產生的 WebForms 程式.<br />
@@ -69,8 +69,8 @@ Subject: 實作 Microsoft.AspNet.Identity.EntityFramework<br />
 <ol>
 	<li><a href="https://github.com/github-honda/WebAuthSQL">WebAuthSQL</a>: Visual Studio 2015, WebForms, SQLServer</li>
 	<li><a href="https://github.com/github-honda/WebAuthMySQL">WebAuthMySQL</a>: Visual Studio 2015, WebForms, MySql</li>
-	<li><a href="https://github.com/github-honda/VS2019Practice/tree/VS2019Practice/WebIdentity">WebAuthSQL</a>: Visual Studio 2019, WebForms, SQLServer (本文)</li>
-	<li><a href="https://github.com/github-honda/VS2019Practice/tree/VS2019Practice/WebIdentity">WebAuthSQL</a>: todo: Visual Studio 2019, WebForms, MySql</li>
+	<li><a href="https://github.com/github-honda/VS2019Practice/tree/VS2019Practice/WebIdentity/WebIdentitySqlServer">WebIdentitySqlServer</a>: Visual Studio 2019, WebForms, SQLServer (本文)</li>
+	<li><a href="#">WebAuthMySQL</a>: todo: Visual Studio 2019, WebForms, MySql</li>
 </ol>
 
 本文主要說明在 Visual Studio 2019, NET Framework 4.8 環境下的修改差異.<br />
@@ -121,7 +121,7 @@ Subject: 實作 Microsoft.AspNet.Identity.EntityFramework<br />
 
 1. <a href="https://github.com/github-honda/VS2019Practice/tree/VS2019Practice/WebIdentity/ZLib">ZLib</a>: 公用程式庫.<br />
 2. <a href="https://github.com/github-honda/VS2019Practice/tree/VS2019Practice/WebIdentity/ZSqlClient">ZSqlClient</a>: 存取 SQL Server 資料庫公用程式庫. (也可用於 MSSQLLocalDB 或 SQL Express 資料庫)<br />
-3. <a href="https://github.com/github-honda/VS2019Practice/tree/VS2019Practice/WebIdentity/ZIdentitySqlServer">ZIdentitySqlServer</a>ZIdentitySqlServer: 替代 Microsoft.AspNet.Identity.EntityFramework, 存取<a href="#ERD of ASP.NET Identity">ASP.NET Identity身分認證資料庫</a>的公用程式庫.<br />
+3. <a href="https://github.com/github-honda/VS2019Practice/tree/VS2019Practice/WebIdentity/ZIdentitySqlServer">ZIdentitySqlServer</a>: 替代 Microsoft.AspNet.Identity.EntityFramework, 存取<a href="#ERD of ASP.NET Identity">ASP.NET Identity身分認證資料庫</a>的公用程式庫.<br />
 
 請將這三個專案, 加入 Solution 中並參考引用.<br />
 
@@ -170,7 +170,7 @@ Subject: 實作 Microsoft.AspNet.Identity.EntityFramework<br />
 
 	<li><a name="9">建立新資料庫, 移除舊資料庫</a>
 <br />
-  參考 <a href="https://github.com/github-honda/WebAuthSQL/blob/master/doc/CreateDBAspNet1-SqlServer.sql">CreateDBAspNet1-SqlServer.sql</a>
+  參考 <a href="CreateDBAspNet1-SqlServer.sql">CreateDBAspNet1-SqlServer.sql</a>
  建立 SQL Server 新資料庫 DBAspNet1
 <br />
   移除在 App_Data 目錄下的舊資料庫 MSSQLLocalDB:
@@ -183,7 +183,10 @@ Subject: 實作 Microsoft.AspNet.Identity.EntityFramework<br />
 <br />
 
 
-	<li><a name="10">編譯執行測試</a>
+	<li><a name="10">編譯執行測試</a><br />
+- 測試帳號:<br />
+- test1@some.com, aaBB11!!<br />
+- test2@some.com, aaBB22!!<br />
 	</li>
 <br />
 
