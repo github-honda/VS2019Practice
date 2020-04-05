@@ -1,5 +1,5 @@
 ﻿<!-- 
-20200402, Honda, Readme-WebIdentitySqlServer.html.  2
+20200402, Honda, Readme-WebIdentitySqlServer.html.
 -->
 
 <!DOCTYPE html>
@@ -51,7 +51,7 @@
 
 From: hondachen@hotmail.com<br />
 Date: 2020-04-02<br />
-Subject: 實作 Microsoft.AspNet.Identity<br />
+Subject: 實作 Microsoft.AspNet.Identity.EntityFramework<br />
 <br />
 
 
@@ -69,8 +69,8 @@ Subject: 實作 Microsoft.AspNet.Identity<br />
 <ol>
 	<li><a href="https://github.com/github-honda/WebAuthSQL">WebAuthSQL</a>: Visual Studio 2015, WebForms, SQLServer</li>
 	<li><a href="https://github.com/github-honda/WebAuthMySQL">WebAuthMySQL</a>: Visual Studio 2015, WebForms, MySql</li>
-	<li><a href="todo">WebAuthSQL</a>: Visual Studio 2019, WebForms, SQLServer (本文)</li>
-	<li><a href="#">WebAuthMySQL</a>: todo: Visual Studio 2019, WebForms, MySql</li>
+	<li><a href="https://github.com/github-honda/VS2019Practice/tree/VS2019Practice/WebIdentity">WebAuthSQL</a>: Visual Studio 2019, WebForms, SQLServer (本文)</li>
+	<li><a href="https://github.com/github-honda/VS2019Practice/tree/VS2019Practice/WebIdentity">WebAuthSQL</a>: todo: Visual Studio 2019, WebForms, MySql</li>
 </ol>
 
 本文主要說明在 Visual Studio 2019, NET Framework 4.8 環境下的修改差異.<br />
@@ -119,10 +119,9 @@ Subject: 實作 Microsoft.AspNet.Identity<br />
 
 本文提供 Visual Studio 2019 的程式庫版本專案補齊:<br />
 
-1. ZLib: 公用程式庫.<br />
-2. ZSqlClient: 存取 SQL Server 資料庫公用程式庫. (也可用於 MSSQLLocalDB 或 SQL Express 資料庫)<br />
-3. ZIdentitySqlServer: 替代 Microsoft.AspNet.Identity.EntityFramework, 存取<a href="#ERD of ASP.NET Identity">ASP.NET Identity身分認證資料庫</a>的公用程式庫.<br />
-	<a href="todo">????</a>: Visual Studio 2019, WebForms, SQLServer (本文)
+1. <a href="https://github.com/github-honda/VS2019Practice/tree/VS2019Practice/WebIdentity/ZLib">ZLib</a>: 公用程式庫.<br />
+2. <a href="https://github.com/github-honda/VS2019Practice/tree/VS2019Practice/WebIdentity/ZSqlClient">ZSqlClient</a>: 存取 SQL Server 資料庫公用程式庫. (也可用於 MSSQLLocalDB 或 SQL Express 資料庫)<br />
+3. <a href="https://github.com/github-honda/VS2019Practice/tree/VS2019Practice/WebIdentity/ZIdentitySqlServer">ZIdentitySqlServer</a>ZIdentitySqlServer: 替代 Microsoft.AspNet.Identity.EntityFramework, 存取<a href="#ERD of ASP.NET Identity">ASP.NET Identity身分認證資料庫</a>的公用程式庫.<br />
 
 請將這三個專案, 加入 Solution 中並參考引用.<br />
 
