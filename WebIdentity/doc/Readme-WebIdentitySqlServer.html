@@ -48,7 +48,7 @@
 <div class="container-fluid">
 
 From: hondachen@hotmail.com<br />
-Date: 2020-04-02<br />
+Date: 2020-04-05<br />
 Subject: 實作 Microsoft.AspNet.Identity.EntityFramework<br />
 <br />
 
@@ -75,14 +75,14 @@ Subject: 實作 Microsoft.AspNet.Identity.EntityFramework<br />
 步驟:
 <ol>
 	<li><a href="#1">建立網站 WebIdentitySqlServer</a></li>
-	<li><a href="#2">解除安裝 Microsoft.AspNet.Identity.EntityFramework 元件</a></li>
+	<li><a href="#2">解除安裝 Microsoft.AspNet.Identity.EntityFramework 元件 及 EntityFrameWork 元件</a></li>
 	<li><a href="#3">移除參考 EntityFramework 及 EntityFramework.SQLServer</a></li>
-	<li><a href="#4">加入以 SQL 語法製作的 ASP.NET Identity 自訂元件</a></li>
-	<li><a href="#5">將 EntityFramework 改為使用 LibSQL.DIdentity</a></li>
-	<li><a href="#6">將 ApplicationUser 改為繼承 LibSQL.DIdentity.User., ApplicationDbContext 改為繼承 ZLib.DLib.ZSqlClient</a></li>
-	<li><a href="#7">將 ApplicationUserManager 類別需要的資料庫改為由 ZLib.DLib.ZSqlClient 提供</a></li>
-	<li><a href="#8">將 ConnnectionString 改到新的資料庫位置</a></li>
-	<li><a href="#9">建立新ASP.NET Identity身分認證資料庫, 移除舊資料庫</a></li>
+	<li><a href="#4">加入自訂的 ASP.NET Identity 實作程式</a></li>
+	<li><a href="#5">將 Microsoft.AspNet.Identity.EntityFramework 改為使用 ZIdentitySqlServer</a></li>
+	<li><a href="#6">將 IdentityModel.cs 之 ApplicationUser 改為繼承 ZUser, ApplicationDbContext 改為繼承 ZSqlClient</a></li>
+	<li><a href="#7">將 IdntityConfig.cs 取得的 ApplicationDBContext 改為 ZSqlClient</a></li>
+	<li><a href="#8">將 Web.Config 之 ConnnectionString 改到新的資料庫位置</a></li>
+	<li><a href="#9">建立新資料庫, 移除舊資料庫</a></li>
 	<li><a href="#10">編譯執行測試</a></li>
 </ol>
 
