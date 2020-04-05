@@ -1,6 +1,8 @@
 # VS2019Practice
 
-## Implement Microsoft.AspNet.Identity.EntityFramework
+## WebIdentity.sln
+** Implement Microsoft.AspNet.Identity.EntityFramework **
 
-### with SQLServer
-** WebIdentitySqlServer **
+### WebIdentitySqlServer.csproj
+** Implement Microsoft.AspNet.Identity.EntityFramework with SQL Server **
+test1@some.com, aaBB11!! , test2@some.com, aaBB22!!
