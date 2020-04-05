@@ -5,6 +5,6 @@
 
 ### WebIdentitySqlServer.csproj
 **Implement Microsoft.AspNet.Identity.EntityFramework with SQL Server**
-- ´ú¸Õ±b¸¹:
+- æ¸¬è©¦å¸³è™Ÿ:
 - test1@some.com, aaBB11!!
 - test2@some.com, aaBB22!!
