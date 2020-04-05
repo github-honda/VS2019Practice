@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebIdentitySqlServer", "WebForm6\WebIdentitySqlServer.csproj", "{C4546B60-4CBA-482F-B0C0-4395E4BDCB5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZSqlClient", "ZSqlClient\ZSqlClient.csproj", "{7DD403A5-4A59-49B3-8DA6-0316C7D36533}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZLib", "ZLib\ZLib.csproj", "{7FFBDB44-51A2-4F48-962A-A49331286CCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZIdentitySqlServer", "ZIdentitySqlServer\ZIdentitySqlServer.csproj", "{A0326BA3-E451-4B08-A25E-8DC6F8048582}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4546B60-4CBA-482F-B0C0-4395E4BDCB5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4546B60-4CBA-482F-B0C0-4395E4BDCB5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4546B60-4CBA-482F-B0C0-4395E4BDCB5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4546B60-4CBA-482F-B0C0-4395E4BDCB5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DD403A5-4A59-49B3-8DA6-0316C7D36533}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DD403A5-4A59-49B3-8DA6-0316C7D36533}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DD403A5-4A59-49B3-8DA6-0316C7D36533}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DD403A5-4A59-49B3-8DA6-0316C7D36533}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FFBDB44-51A2-4F48-962A-A49331286CCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FFBDB44-51A2-4F48-962A-A49331286CCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FFBDB44-51A2-4F48-962A-A49331286CCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FFBDB44-51A2-4F48-962A-A49331286CCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0326BA3-E451-4B08-A25E-8DC6F8048582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0326BA3-E451-4B08-A25E-8DC6F8048582}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0326BA3-E451-4B08-A25E-8DC6F8048582}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0326BA3-E451-4B08-A25E-8DC6F8048582}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {42CD4CEC-1B85-4903-A3C9-19AA5696E6E3}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,202 @@
+<!-- 
+20200402, Honda, Readme-WebIdentitySqlServer.html. 
+-->
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics - svc.011.idv.tw -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125026365-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-125026365-2');
+</script>
+
+	<title>實作 Microsoft.AspNet.Identity</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+    <style type="text/css">
+        body {
+            font-family: "DFKai-sb","MingLiU","Microsoft JhengHei";
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    實作 Microsoft.AspNet.Identity
+	<button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse">
+<ul class="navbar-nav mr-auto">
+	<li class="nav-item">&nbsp;</li>
+</ul>
+<div class="text-right">
+<a href="http://www.011.idv.tw">011</a>
+</div>
+        </div>
+    </nav>
+
+
+<div class="container-fluid">
+
+From: hondachen@hotmail.com<br />
+Date: 2020-04-02<br />
+Subject: 實作 Microsoft.AspNet.Identity<br />
+<br />
+
+
+
+本文示範在 ASP.NET Web Forms 網站中, 替換掉 Microsoft.AspNet.Identity.EntityFramework 的方法.<br />
+<br />
+
+修改的方法, 跟先前修改 Visual Studio 2015 自動產生的方法相同:<br />  
+1. <a href="http://svc.011.idv.tw/CodeHelper/cs/ASPNET/identity/WebAuthSQL/doc/Readme-WebAuthSQL.html">SQLServer </a><br />
+2. <a href="http://svc.011.idv.tw/CodeHelper/cs/ASPNET/identity/WebAuthMySQL/doc/Readme-WebAuthMySQL.html">MySQL </a><br />
+但是這次的目標是要修改 Visual Studio 2019 自動產生的 WebForms 程式.<br />
+<br />
+
+這一系列的程式修改結果, 可從以下網址下載:<br />
+<ol>
+	<li><a href="https://github.com/github-honda/WebAuthSQL">WebAuthSQL</a>: Visual Studio 2015, WebForms, SQLServer</li>
+	<li><a href="https://github.com/github-honda/WebAuthMySQL">WebAuthMySQL</a>: Visual Studio 2015, WebForms, MySql</li>
+	<li><a href="todo">WebAuthSQL</a>: Visual Studio 2019, WebForms, SQLServer (本文)</li>
+	<li><a href="#">WebAuthMySQL</a>: todo: Visual Studio 2019, WebForms, MySql</li>
+</ol>
+
+本文主要說明在 Visual Studio 2019, NET Framework 4.8 環境下的修改差異.<br />
+<br />
+
+步驟:
+<ol>
+	<li><a href="#1">建立網站 WebIdentitySqlServer</a></li>
+	<li><a href="#2">解除安裝 Microsoft.AspNet.Identity.EntityFramework 元件</a></li>
+	<li><a href="#3">移除參考 EntityFramework 及 EntityFramework.SQLServer</a></li>
+	<li><a href="#4">加入以 SQL 語法製作的 ASP.NET Identity 自訂元件</a></li>
+	<li><a href="#5">將 EntityFramework 改為使用 LibSQL.DIdentity</a></li>
+	<li><a href="#6">將 ApplicationUser 改為繼承 LibSQL.DIdentity.User., ApplicationDbContext 改為繼承 ZLib.DLib.ZSqlClient</a></li>
+	<li><a href="#7">將 ApplicationUserManager 類別需要的資料庫改為由 ZLib.DLib.ZSqlClient 提供</a></li>
+	<li><a href="#8">將 ConnnectionString 改到新的資料庫位置</a></li>
+	<li><a href="#9">建立新ASP.NET Identity身分認證資料庫, 移除舊資料庫</a></li>
+	<li><a href="#10">編譯執行測試</a></li>
+</ol>
+
+步驟詳細說明:
+<ol>
+	<li><a name="1">建立網站專案 WebIdentitySqlServer</a>
+<br />
+預定修改的網站, 可自行以 Visual Studio 2019 自動產生(選擇 Web Forms, Authentication=Individual User Accounts). 或是下載 <a href="https://github.com/github-honda/VS2019TemplateOriginal/tree/master/WebForm6">WebForm6</a>後, 將專案名稱改為WebIdentitySqlServer.<br />
+<br />
+<img src="1010-BuildWebFormsProject.jpg" class="img-fluid" alt=""><br />
+<br />
+
+	<li><a name="2">解除安裝 Microsoft.AspNet.Identity.EntityFramework 元件 及 EntityFrameWork</a>
+<br />
+<img src="2010-UninstallIdentitEntityFramework.jpg" class="img-fluid" alt=""><br />
+<br />
+<img src="2020-UninstallEntityFramework.jpg" class="img-fluid" alt=""><br />
+<br />
+	</li>
+<br />
+
+	<li><a name="3">移除參考 EntityFramework 及 EntityFramework.SQLServer</a>
+<br />
+<img src="3010-RemoveReference.jpg" class="img-fluid" alt="">
+
+	</li>
+<br />
+
+	<li><a name="4">加入自訂的 ASP.NET Identity 實作程式</a><br />
+
+本文提供 Visual Studio 2019 的程式庫版本專案補齊:<br />
+
+1. ZLib: 公用程式庫.<br />
+2. ZSqlClient: 存取 SQL Server 資料庫公用程式庫. (也可用於 MSSQLLocalDB 或 SQL Express 資料庫)<br />
+3. ZIdentitySqlServer: 替代 Microsoft.AspNet.Identity.EntityFramework, 存取<a href="#ERD of ASP.NET Identity">ASP.NET Identity身分認證資料庫</a>的公用程式庫.<br />
+	<a href="todo">????</a>: Visual Studio 2019, WebForms, SQLServer (本文)
+
+請將這三個專案, 加入 Solution 中並參考引用.<br />
+
+<br />
+<br />
+<a name="ERD of ASP.NET Identity">ASP.NET Identity身分認證資料庫</a>
+<img src="020040-ERD-Original.jpg" class="img-fluid" alt="ERD of ASP.NET Identity">
+<br />
+	</li>
+
+
+	<li><a name="5">將 Microsoft.AspNet.Identity.EntityFramework 改為使用 ZIdentitySqlServer</a>
+<br />
+	將專案中, 所有的 using Microsoft.AspNet.Identity.EntityFramework; 的 .cs 程式, 都改成 using ZIdentitySqlServer;
+<br />
+   需要修改的程式清單如下:
+<br />
+     App_Start\IdentityConfig.cs
+<br />
+     App_Start\Startup.Auth.cs
+<br />
+     Models\IdentityModel.cs
+<br />
+     Account\Manage.aspx.cs
+<br />
+	</li>
+<br />
+
+	<li><a name="6">將 IdentityModel.cs 之 ApplicationUser 改為繼承 ZUser, ApplicationDbContext 改為繼承 ZSqlClient</a><br />
+<img src="6010-IdentityModel.jpg" class="img-fluid" alt="">
+<br />
+	</li>
+<br />
+  
+
+	<li><a name="7">將 IdntityConfig.cs 取得的 ApplicationDBContext 改為 ZSqlClient</a><br />
+<img src="7010-IdentityConfig.jpg" class="img-fluid" alt=""><br />
+	</li>
+<br />
+  
+
+	<li><a name="8">將 Web.Config 之 ConnnectionString 改到新的資料庫位置</a><br />
+<img src="8010-ConnectionString.jpg" class="img-fluid" alt=""><br />
+	</li>
+<br />
+
+	<li><a name="9">建立新資料庫, 移除舊資料庫</a>
+<br />
+  參考 <a href="https://github.com/github-honda/WebAuthSQL/blob/master/doc/CreateDBAspNet1-SqlServer.sql">CreateDBAspNet1-SqlServer.sql</a>
+ 建立 SQL Server 新資料庫 DBAspNet1
+<br />
+  移除在 App_Data 目錄下的舊資料庫 MSSQLLocalDB:
+<br />
+    App_Data\*.MDF
+<br />
+    App_Data\*.LDF
+<br />
+	</li>
+<br />
+
+
+	<li><a name="10">編譯執行測試</a>
+	</li>
+<br />
+
+</ol>
+
+
+<div class="text-right">
+<a href="/CodeHelper/cs/index.html">C# CodeHelper</a> |
+<a href="http://www.011.idv.tw">011</a>
+</div>
+
+</div>
+</body>
+
+</html>
