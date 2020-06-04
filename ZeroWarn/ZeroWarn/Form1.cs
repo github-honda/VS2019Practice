@@ -12,18 +12,23 @@ namespace ZeroWarn
 {
     public partial class Form1 : Form
     {
-        Class1 _class1;  // OK.
-        Class1 _class2; // CS0169	The field 'Form1._class2' is never used
-        string _somevar1; // OK.
-        string some_one_say; // OK.
-        string mString1; // OK.
-        
+        Class1 _class1;  // OK for Naming rule.
+
+        // IDE0044 Make field readonly.
+        // IDE0051 Private member is unused.
+        Class1 _class2; 
+
+        string _somevar1; // OK for Naming rule.
+        string some_one_say; // OK for Naming rule.
+        string mString1; // OK for Naming rule.
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e) // IDE1006	Naming rule violation: These words must begin with upper case characters
+        // IDE1006	Naming rule violation: These words must begin with upper case characters: button1_Click.
+        private void button1_Click(object sender, EventArgs e) 
         {
             textBox1.Text = DateTime.Now.ToString();
             _somevar1 = "test";
@@ -34,18 +39,29 @@ namespace ZeroWarn
             textBox1.Text = mString1;
         }
 
-        private void some_function_here() // Message IDE1006	Naming rule violation: These words must begin with upper case characters: some_function_here
+        // IDE1006 Naming rule violation: These words must begin with upper case characters: some_function_here.
+        // IDE0051 Private member is unused.
+        private void some_function_here()
         { }
 
-        private void Some_function_here_OK() // OK
+
+        // IDE0051 Private member is unused.
+        private void Some_function_here_OK()
         { }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            _class1 = new Class1();  // IDE0017	Object initialization can be simplified
-            _class1._s111 = DateTime.Now.ToString();
+            // IDE0017 Object initialization can be simplified
+            _class1 = new Class1();  
+            _class1.Field1 = DateTime.Now.ToString();
 
-            textBox1.Text = _class1._s111;
+            // To fix IDE0017 Object initialization can be simplified.
+            _class1 = new Class1
+            {
+                Field1 = DateTime.Now.ToString()
+            };
+
+            textBox1.Text = _class1.Field1;
         }
     }
 }
