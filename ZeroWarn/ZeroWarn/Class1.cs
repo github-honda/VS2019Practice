@@ -5,6 +5,7 @@ Summary:
 2. Const can begin with lower case characters and Prefix '_'. Why ?
 
  */
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,17 +20,18 @@ namespace ZeroWarn
         public string FieldTest1 { get; set; } // OK for Naming rule.
         public string Fieldtest1 { get; set; } // OK for Naming rule.
 
-        // IDE1006 Naming rule violation: Prefix '_' is not expected.
-        public string _Field2 { get; set; } 
+        // 方法必須大寫字母開頭.
+        // Property 別用 "_" 當字頭.
+        // Field, const 則不影響
+        public string _Field2 { get; set; } // IDE1006 Naming rule violation: Prefix '_' is not expected.
+        public string _Field3;
+        public const string _Const4 = "";
 
-        // IDE1006 Naming rule violation: These words must begin with upper case characters.
-        public string sName { get; set; }
+        public string sName { get; set; } // IDE1006 Naming rule violation: These words must begin with upper case characters.
 
-        // IDE0049 Name can be simplified. Because of "Boolean".
-        public const Boolean bDebug = true;
 
-        // To fix IDE0049 Name can be simplified. Because of "Boolean".
-        // Why const can begin with lower case characters and Prefix '_' ?
+        // 以 bool 替代 Boolean.
+        public const Boolean bDebug = true; // IDE0049 Name can be simplified. Change Boolean to Bool.
         public const bool bDebugOk = true;
         public const bool _bDebugOk = true;
 
@@ -40,11 +42,32 @@ namespace ZeroWarn
         public void Methodtest1() // OK for Naming rule.
         { }
 
+        // 方法必須大寫字母開頭.
         // IDE1006 Naming rule violation: These words must begin with upper case characters.
         public void method1()
         {
+            string _LocalVarUnderLineOK;
+            string localvarbeginwithlowercharOK;
+            Boolean bLocalBooleanOK = true;
+
+
+            // Message	IDE0059	Unnecessary assignment of a value to 'UnnecessaryAssignmentOfAValue'.
+            string UnnecessaryAssignmentOfAValue = string.Empty;
+
             if (bDebug)
                 Field1 = "dummy";
+
+            _LocalVarUnderLineOK = Field1;
+            if (_LocalVarUnderLineOK == Field1)
+                _LocalVarUnderLineOK = Field1;
+
+            localvarbeginwithlowercharOK = Field1;
+            if (localvarbeginwithlowercharOK == Field1)
+                localvarbeginwithlowercharOK = Field1;
+
+            if (bLocalBooleanOK)
+                _LocalVarUnderLineOK = "Dummy";
+
         }
 
         // IDE1006 Naming rule violation: These words must begin with upper case characters.
