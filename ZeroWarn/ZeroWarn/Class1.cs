@@ -1,12 +1,4 @@
-﻿/*
-
-Summary:
-1. Fieldtest1 is OK for naming rule. (fieldtest1, _fieldtest1 is NOT OK).
-2. Const can begin with lower case characters and Prefix '_'. Why ?
-
- */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,6 +41,7 @@ namespace ZeroWarn
             string _LocalVarUnderLineOK;
             string localvarbeginwithlowercharOK;
             Boolean bLocalBooleanOK = true;
+            string s1;
 
 
             // Message	IDE0059	Unnecessary assignment of a value to 'UnnecessaryAssignmentOfAValue'.
@@ -68,6 +61,12 @@ namespace ZeroWarn
             if (bLocalBooleanOK)
                 _LocalVarUnderLineOK = "Dummy";
 
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("dummy");
+            //s1 = $"{sb.ToString()}";  // Message IDE0071 Interpolation can be simplified
+            //s1 = $"{sb}";  // Message	IDE0059	Unnecessary assignment of a value to 's1'
+            _ = $"{sb}";
         }
 
         // IDE1006 Naming rule violation: These words must begin with upper case characters.
